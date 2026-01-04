@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200 dark:border-gray-800;
+  }
+
+  body {
+    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100;
+  }
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(to right, rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-500;
+}
+
+/* Print styles */
+@media print {
+
+  header,
+  footer,
+  button,
+  .CategoryFilter,
+  #theme-toggle,
+  #language-toggle,
+  .no-print,
+  .StarfieldBackground,
+  canvas,
+  .ArrowDown {
+    display: none !important;
+  }
+
+  /* Force background colors and colors to be printed */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
+    /* Inherit theme colors from data-theme or class */
+  }
+
+  .max-w-7xl {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+
+  /* Remove line clamps for full prompt printing */
+  .line-clamp-2,
+  .line-clamp-3,
+  .line-clamp-4 {
+    display: block !important;
+    -webkit-line-clamp: none !important;
+    overflow: visible !important;
+  }
+
+  .grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 2rem !important;
+    align-items: start !important;
+  }
+
+  .group {
+    break-inside: avoid-page !important;
+    page-break-inside: avoid !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 2rem !important;
+  }
+
+  /* Exactly 2 cards per page (breaks after every 2nd card) */
+  .group:nth-child(2n) {
+    break-after: page !important;
+  }
+
+  /* Sample Image Visibility & Size Constraint */
+  .h-48 {
+    height: auto !important;
+    max-height: 200px !important;
+    /* Constrain to help 2 cards fit on one page */
+    overflow: hidden !important;
+  }
+
+  img {
+    max-width: 100% !important;
+    max-height: 200px !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .bg-primary-100 {
+    /* Maintain brand colors in print */
+  }
+}
